@@ -26,6 +26,7 @@ public class Drivetrain extends SubsystemBase{
   private final WPI_TalonSRX leftDriveTalon;
   private final WPI_TalonSRX rightDriveTalon;
   private AHRS navx = new AHRS (SPI.Port.kMXP);
+  
 
 
   public Drivetrain() {
@@ -42,6 +43,7 @@ public class Drivetrain extends SubsystemBase{
     rightDriveTalon.configFactoryDefault();
     rightDriveTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,10);
     
+  
 
     // Optionally, initialize the navX if needed
     // navx = new AHRS(SPI.Port.kMXP); // Example for SPI
@@ -60,6 +62,18 @@ public class Drivetrain extends SubsystemBase{
     return navx.getAngle();
   }
   
+  public double getTicks(){
+    return ((leftDriveTalon.getSelectedSensorPosition(0)+rightDriveTalon.getSelectedSensorPosition(0))/2);
+  }
+  public double getMeters(){
+    return (getTicks()/4096)*Units.inchesToMeters(6)*Math.PI;
+  }
+  public void resetEnc(){
+    leftDriveTalon.setSelectedSensorPosition(0,0,10);
+    rightDriveTalon.setSelectedSensorPosition(0,0,10);
+  }
+
+
 
 
   
