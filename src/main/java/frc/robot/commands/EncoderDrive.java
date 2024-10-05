@@ -24,6 +24,7 @@ public class EncoderDrive extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    setPoint = 1;
     dt.resetEnc();
     dt.tankDrive(0, 0);
 
@@ -32,9 +33,7 @@ public class EncoderDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    while (dt.getMeters() != setPoint){
-        dt.tankDrive(motorspeed,motorspeed);
-    }
+    dt.tankDrive(0.4,0.4);
   }
 
   // Called once the command ends or is interrupted.
