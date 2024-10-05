@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -21,19 +22,52 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class Drivetrain extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public Drivetrain() {}
+public class Drivetrain extends SubsystemBase{ 
+  private final WPI_TalonSRX leftDriveTalon;
+  private final WPI_TalonSRX rightDriveTalon;
+  private AHRS navx = new AHRS (SPI.Port.kMXP);
 
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
 
+  public Drivetrain() {
+    // Initialize the Talon motor controllers in the constructor
+    leftDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPort.leftDriveTalonPort);
+    rightDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPort.rightDriveTalonPort);
+    leftDriveTalon.setNeutralMode(NeutralMode.Coast);
+    rightDriveTalon.setNeutralMode(NeutralMode.Coast);
+    leftDriveTalon.setSensorPhase(true);
+    rightDriveTalon.setSensorPhase(true);
+
+    leftDriveTalon.configFactoryDefault();
+    leftDriveTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,10);
+    rightDriveTalon.configFactoryDefault();
+    rightDriveTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,10);
+    
+
+    // Optionally, initialize the navX if needed
+    // navx = new AHRS(SPI.Port.kMXP); // Example for SPI
+}
+
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    // You can implement tank driving logic here
+    leftDriveTalon.set(leftSpeed);
+    rightDriveTalon.set(rightSpeed);
+    
+}
+  public void reset(){
+    navx.reset();
+  }
+  public double getAngle(){
+    return navx.getAngle();
+  }
+  
+
+
+  
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("L rizz volt", leftDriveTalon.getMotorOutputPercent());
+    SmartDashboard.putNumber("R idfk volt", rightDriveTalon.getMotorOutputPercent());
+    SmartDashboard.putNumber("ngle",navx.getAngle());
   }
 
   @Override
