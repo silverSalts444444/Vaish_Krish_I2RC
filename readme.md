@@ -1,24 +1,25 @@
 # Preseason Digital Notebook Example
-Name: **Krish Vaish**
+Name: **[INSERT NAME HERE]**
 
-Section: **I2RC**
+Section: **[I2RC/ARC]**
 
-Week: **1**
+Week: **4**
 
 
 ## Code
 
-The main topic this week was: **[TOPIC NAME]**
+The main topic this week was: **encoders**
 
-Commands: **[COMMANDS]**
+Commands: **TankDrive, Encoder Drive**
 
-Subsystems: **[SUBSYSTEMS]**
+Subsystems: **Drivetrain**
 
 ### How does the code work?
-Write about how it works here
+a encoderdrive class was created with some commands which are executed in the robot container
 
 
 ### Important notes for future reference
 Notes about git, and helpful resources, etc. 
+uh
 
-Please put them here, they will really help you in the future 
+Please put them here, they will really help you in the
