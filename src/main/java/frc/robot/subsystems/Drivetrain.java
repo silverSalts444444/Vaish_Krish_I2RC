@@ -35,6 +35,7 @@ public class Drivetrain extends SubsystemBase{
     rightDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPort.rightDriveTalonPort);
     leftDriveTalon.setNeutralMode(NeutralMode.Coast);
     rightDriveTalon.setNeutralMode(NeutralMode.Coast);
+    rightDriveTalon.setInverted(true);
     leftDriveTalon.setSensorPhase(true);
     rightDriveTalon.setSensorPhase(true);
 
@@ -82,6 +83,7 @@ public class Drivetrain extends SubsystemBase{
     SmartDashboard.putNumber("L rizz volt", leftDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("R idfk volt", rightDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("ngle",navx.getAngle());
+    SmartDashboard.putNumber("psioshun", getMeters());
   }
 
   @Override

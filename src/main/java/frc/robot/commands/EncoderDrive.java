@@ -8,15 +8,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 /** An example command that uses an example subsystem. */
 public class EncoderDrive extends Command {
   
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+
   Drivetrain dt;
   double setPoint;
-  double motorspeed;
 
-  public EncoderDrive(Drivetrain dt, double setPoint, double motorspeed) {
+
+  public EncoderDrive(Drivetrain dt, double setPoint) {
     this.dt = dt;
     this.setPoint = setPoint;
-    this.motorspeed = motorspeed;
 
     addRequirements(dt);
   }
@@ -24,7 +23,6 @@ public class EncoderDrive extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    setPoint = 1;
     dt.resetEnc();
     dt.tankDrive(0, 0);
 
@@ -38,11 +36,16 @@ public class EncoderDrive extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    dt.tankDrive(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (dt.getMeters() >= setPoint) {
+      return true;
+    }
     return false;
   }
 }
