@@ -8,18 +8,17 @@ Week: **4**
 
 ## Code
 
-The main topic this week was: **encoders**
+The main topic this week was: **pid**
 
-Commands: **TankDrive, Encoder Drive**
+Commands: **PIDTurn**
 
 Subsystems: **Drivetrain**
 
 ### How does the code work?
-a encoderdrive class was created with some commands which are executed in the robot container
-
+it has created a pid turn command that uses pid to turn the robot
 
 ### Important notes for future reference
 Notes about git, and helpful resources, etc. 
-uh
+PID :3(nothing idk)
 
 Please put them here, they will really help you in the
