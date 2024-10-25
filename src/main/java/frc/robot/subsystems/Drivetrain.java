@@ -84,6 +84,7 @@ public class Drivetrain extends SubsystemBase{
     SmartDashboard.putNumber("R idfk volt", rightDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("ngle",navx.getAngle());
     SmartDashboard.putNumber("psioshun", getMeters());
+    
   }
 
   @Override
